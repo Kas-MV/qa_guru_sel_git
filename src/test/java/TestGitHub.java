@@ -1,31 +1,30 @@
 import org.junit.jupiter.api.Test;
+import org.qaguru.page.GitPage;
+import org.qaguru.state.BaseState;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+public class TestGitHub extends BaseState {
 
-public class TestGitHub {
+    GitPage gitPage = new GitPage();
 
     @Test
     void testGitHubSelenide() {
 
-        open("https://github.com/");
-        $("[placeholder='Search GitHub']").setValue("selenide").pressEnter();
-        $$("ul.repo-list li").first().$("a").click();
-        $("#wiki-tab").click();
-        $("#wiki-pages-filter").setValue("SoftAssertions");
-        $("[href='/selenide/selenide/wiki/SoftAssertions']").click();
-        $(".markdown-body").shouldHave(text("Using JUnit5 extend test class:"));
-        $(".markdown-body").shouldHave(text("" +
+        gitPage.openPageGitHub();
+        gitPage.setSearchFieldValueAndPressEnter("selenide");
+        gitPage.clickListSearch();
+        gitPage.clickWikiTab();
+        gitPage.setFindFieldAndPressEnter("SoftAssertions");
+        gitPage.wikiSelenide.click();
+        gitPage.checkResult("Using JUnit5 extend test class:");
+        gitPage.checkResult("" +
                 "@ExtendWith({SoftAssertsExtension.class})\n" +
                 "class Tests {\n" +
                 "  @Test\n" +
                 "  void test() {\n" +
                 "    Configuration.assertionMode = SOFT;\n" +
                 "    open(\"page.html\");\n" +
-                "\n" +
                 "    $(\"#first\").should(visible).click();\n" +
                 "    $(\"#second\").should(visible).click();\n" +
-                "  }\n" +
-                "}"));
+                "}");
     }
 }
