@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import org.qaguru.page.GitPage;
-import org.qaguru.state.BaseState;
+import qaguru.page.GitPage;
+import qaguru.state.BaseState;
 
 public class TestGitHub extends BaseState {
 

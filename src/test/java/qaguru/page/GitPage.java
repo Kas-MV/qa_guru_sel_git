@@ -1,4 +1,4 @@
-package org.qaguru.page;
+package qaguru.page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
